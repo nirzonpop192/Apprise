@@ -29,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -42,16 +45,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // retrofit
-
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
-// GSON
-
+    // GSON
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-// coroutine
-
+    // coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
-
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
+    // CarouselRecyclerview
+    implementation 'com.github.sparrow007:carouselrecyclerview:1.2.5'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 }
