@@ -45,13 +45,12 @@ class MainActivity : AppCompatActivity() {
         binding.rvBanner.adapter = adapter
         binding.rvBanner.set3DItem(true)
         binding.rvBanner.setAlpha(true)
-        val carouselLayoutManager = binding.rvBanner.getCarouselLayoutManager()
-        val currentlyCenterPosition = binding.rvBanner.getSelectedPosition()
+
 
         binding.rvBanner.setItemSelectListener(object : CarouselLayoutManager.OnSelected {
             override fun onItemSelected(position: Int) {
                 //Cente item
-                Toast.makeText(this@MainActivity, list[position].img.toString(), Toast.LENGTH_LONG).show()
+//                Toast.makeText(this@MainActivity, list[position].img.toString(), Toast.LENGTH_LONG).show()
 
             }
         })
