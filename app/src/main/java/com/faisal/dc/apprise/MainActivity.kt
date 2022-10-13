@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch {
             val result = quotesApi.getMovie("tt3896198","2088fa00")
-//            val result = quotesApi.getD()
+
             if (result != null)
             // Checking the results
                 Log.d("dim: ", result.body().toString())
