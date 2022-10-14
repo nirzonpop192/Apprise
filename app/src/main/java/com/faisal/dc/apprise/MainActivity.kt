@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.faisal.dc.apprise.adapter.CarouselAdapter
 import com.faisal.dc.apprise.adapter.HomeMovieAdapter
 import com.faisal.dc.apprise.databinding.ActivityMainBinding
+import com.faisal.dc.apprise.model.BannerDataModel
 import com.faisal.dc.apprise.model.Search
 import com.faisal.dc.apprise.network.AppApi
 import com.faisal.dc.apprise.network.RetrofitHelper

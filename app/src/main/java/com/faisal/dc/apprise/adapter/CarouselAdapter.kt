@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.faisal.dc.apprise.BannerDataModel
+import com.faisal.dc.apprise.model.BannerDataModel
 import com.faisal.dc.apprise.R
 import com.faisal.dc.apprise.databinding.RowLayoutBannerBinding
 
