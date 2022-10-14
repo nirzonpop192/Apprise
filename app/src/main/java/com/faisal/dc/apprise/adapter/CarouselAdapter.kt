@@ -1,4 +1,4 @@
-package com.faisal.dc.apprise
+package com.faisal.dc.apprise.adapter
 
 import android.view.LayoutInflater
 
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.faisal.dc.apprise.BannerDataModel
+import com.faisal.dc.apprise.R
 import com.faisal.dc.apprise.databinding.RowLayoutBannerBinding
 
 import com.jackandphantom.carouselrecyclerview.view.ReflectionImageView
@@ -17,7 +19,8 @@ class CarouselAdapter (private var list : List<BannerDataModel>): RecyclerView.A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       val  binding: RowLayoutBannerBinding= DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.row_layout_banner,parent,false)
+       val  binding: RowLayoutBannerBinding= DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+           R.layout.row_layout_banner,parent,false)
       return ViewHolder(binding)
     }
 

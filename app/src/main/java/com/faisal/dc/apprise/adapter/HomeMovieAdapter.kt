@@ -1,4 +1,4 @@
-package com.faisal.dc.apprise
+package com.faisal.dc.apprise.adapter
 
 import android.view.LayoutInflater
 
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.faisal.dc.apprise.R
 import com.faisal.dc.apprise.databinding.RowLayoutMovieBinding
 import com.faisal.dc.apprise.model.Search
 
@@ -19,7 +20,8 @@ class HomeMovieAdapter (private var list : List<Search>): RecyclerView.Adapter<H
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       val  binding: RowLayoutMovieBinding= DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.row_layout_movie,parent,false)
+       val  binding: RowLayoutMovieBinding= DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+           R.layout.row_layout_movie,parent,false)
       return ViewHolder(binding)
     }
 

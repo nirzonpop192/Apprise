@@ -1,4 +1,4 @@
-package com.faisal.dc.apprise
+package com.faisal.dc.apprise.network
 
 import com.faisal.dc.apprise.model.MovieResponse
 import com.faisal.dc.apprise.model.SearchResponse
@@ -12,8 +12,8 @@ import retrofit2.http.Query
 interface AppApi {
     @GET("/")
     suspend fun getMovie(@Query("i") imd_id:String, @Query("apikey")api_key:String) : Response<MovieResponse>
-    @GET("/?i=tt3896198&apikey=2088fa00")
-    suspend fun getD() : Response<MovieResponse>
+//    @GET("/?i=tt3896198&apikey=2088fa00")
+//    suspend fun getD() : Response<MovieResponse>
     @GET("/")
     suspend fun getMovieList(@Query("s") search:String, @Query("page") page:String,@Query("apikey")api_key:String) : Response<SearchResponse>
 

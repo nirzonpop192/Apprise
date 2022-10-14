@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faisal.dc.apprise.adapter.CarouselAdapter
+import com.faisal.dc.apprise.adapter.HomeMovieAdapter
 import com.faisal.dc.apprise.databinding.ActivityMainBinding
 import com.faisal.dc.apprise.model.Search
+import com.faisal.dc.apprise.network.AppApi
+import com.faisal.dc.apprise.network.RetrofitHelper
 import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -23,25 +27,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val quotesApi = RetrofitHelper.getInstance().create(AppApi::class.java)
+
         // launching a new coroutine
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = quotesApi.getMovie("tt3896198",RetrofitHelper.API_KEY)
 
-
-            // Checking the results
-           //     Log.d("dim: ", result.body().toString())
-
-
-            for (i in 1..5) {
-                result.body()?.Poster?.let {
-                    bannerList.add(BannerDataModel(i, it)) }
-
-            }
-            bannerAdapter.notifyDataSetChanged()
-
-
-        }
 
         bannerAdapter = CarouselAdapter(bannerList)
 
@@ -60,12 +48,19 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(applicationContext,LinearLayoutManager.HORIZONTAL,false)
         binding.rvRail1.layoutManager = layoutManager
         binding.rvRail1.adapter=rail_1_Adapter
+
+
+    }
+
+    override fun onResume() {
+        val quotesApi = RetrofitHelper.getInstance().create(AppApi::class.java)
+        super.onResume()
         GlobalScope.launch(Dispatchers.Main) {
-            val result = quotesApi.getMovieList("Batman","1",RetrofitHelper.API_KEY)
+            val result = quotesApi.getMovieList("Batman","1", RetrofitHelper.API_KEY)
 
 
             // Checking the results
-                Log.d("dim: ", result.body().toString())
+            Log.d("dim: ", result.body().toString())
             movieList.addAll( result.body()!!.Search)
 
             rail_1_Adapter.updateData(movieList)
@@ -73,5 +68,22 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        GlobalScope.launch(Dispatchers.Main) {
+            val result = quotesApi.getMovie("tt3896198", RetrofitHelper.API_KEY)
+
+
+            // Checking the results
+            //     Log.d("dim: ", result.body().toString())
+
+
+            for (i in 1..5) {
+                result.body()?.Poster?.let {
+                    bannerList.add(BannerDataModel(i, it)) }
+
+            }
+            bannerAdapter.notifyDataSetChanged()
+
+
+        }
     }
 }
