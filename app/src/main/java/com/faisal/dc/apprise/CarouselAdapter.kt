@@ -10,7 +10,7 @@ import com.faisal.dc.apprise.databinding.RowLayoutBannerBinding
 
 import com.jackandphantom.carouselrecyclerview.view.ReflectionImageView
 
-class CarouselAdapter (private var list : List<DataModel>): RecyclerView.Adapter<CarouselAdapter.ViewHolder>() {
+class CarouselAdapter (private var list : List<BannerDataModel>): RecyclerView.Adapter<CarouselAdapter.ViewHolder>() {
 
     class ViewHolder(binding: RowLayoutBannerBinding) : RecyclerView.ViewHolder(binding.root) {
         val image : ReflectionImageView = binding.image
@@ -29,7 +29,7 @@ class CarouselAdapter (private var list : List<DataModel>): RecyclerView.Adapter
         Glide.with(holder.image).load(list.get(position).urlLink).into(holder.image)
     }
 
-    fun updateData(list: List<DataModel>) {
+    fun updateData(list: List<BannerDataModel>) {
         this.list = list
         notifyDataSetChanged()
     }
