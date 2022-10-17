@@ -8,4 +8,8 @@
         android:id="@+id/mainActivity"
         android:name="com.faisal.dc.apprise.MainActivity"
         android:label="MainActivity" />
+    <activity
+        android:id="@+id/movieDetailsActivity"
+        android:name="com.faisal.dc.apprise.MovieDetailsActivity"
+        android:label="MovieDetailsActivity" />
 </navigation>

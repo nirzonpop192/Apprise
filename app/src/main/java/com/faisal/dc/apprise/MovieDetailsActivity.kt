@@ -9,6 +9,13 @@ import android.widget.MediaController
 import androidx.databinding.DataBindingUtil
 import com.faisal.dc.apprise.databinding.ActivityMainBinding
 import com.faisal.dc.apprise.databinding.ActivityMovieDetailsBinding
+import com.faisal.dc.apprise.model.BannerDataModel
+import com.faisal.dc.apprise.model.Search
+import com.faisal.dc.apprise.network.AppApi
+import com.faisal.dc.apprise.network.RetrofitHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MovieDetailsActivity : AppCompatActivity() {
     lateinit var binding: ActivityMovieDetailsBinding
@@ -24,6 +31,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         mediaController = MediaController(this)
 
         binding.videoView.setOnPreparedListener {
+            it.isLooping=true
             mediaController.setAnchorView(binding.videoContainer)
             binding.videoView.setMediaController(mediaController)
             binding.videoView.seekTo(playbackPosition)
@@ -35,6 +43,24 @@ class MovieDetailsActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.INVISIBLE
             true
         }
+
+        val obj: Search = intent.getSerializableExtra("key") as Search
+
+        binding.tvMovieTitle.text="Title: "+obj.Title
+        binding.tvMovieType.text="Type: "+obj.Type
+        val quotesApi = RetrofitHelper.getInstance().create(AppApi::class.java)
+        GlobalScope.launch(Dispatchers.Main) {
+            val result = quotesApi.getMovie(obj.imdbID, RetrofitHelper.API_KEY)
+
+
+            // Checking the results
+            //     Log.d("dim: ", result.body().toString())
+
+            binding.tvMovieDetails.text="Plot:\n"+result.body()?.Plot
+
+
+
+        }
     }
 
     override fun onStart() {
@@ -43,6 +69,19 @@ class MovieDetailsActivity : AppCompatActivity() {
         val uri = Uri.parse(rtspUrl)
         binding.videoView.setVideoURI(uri)
         binding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.videoView.setOnCompletionListener( MediaPlayer.OnCompletionListener() {
+
+                it.reset();
+            val uri = Uri.parse(rtspUrl)
+            binding.videoView.setVideoURI(uri)
+            binding.videoView.start();
+
+        })
     }
 
     override fun onPause() {

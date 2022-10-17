@@ -12,7 +12,9 @@ import com.faisal.dc.apprise.R
 import com.faisal.dc.apprise.databinding.RowLayoutMovieBinding
 import com.faisal.dc.apprise.model.Search
 
-class HomeMovieAdapter (private var list : List<Search>): RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
+class HomeMovieAdapter (private var list : List<Search>
+,private val mListener: OnItemClickListener?
+): RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
 
     class ViewHolder(binding: RowLayoutMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         val moviePoster : ImageView = binding.ivMovie
@@ -32,10 +34,18 @@ class HomeMovieAdapter (private var list : List<Search>): RecyclerView.Adapter<H
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(holder.moviePoster).load(list.get(position).Poster).into(holder.moviePoster)
         holder.movieTitle.text=list.get(position).Title.toString()
+
+        holder.itemView.setOnClickListener {
+            mListener?.onItemClick(position)
+        }
     }
 
     fun updateData(list: List<Search>) {
         this.list = list
         notifyDataSetChanged()
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick( position: Int)
     }
 }

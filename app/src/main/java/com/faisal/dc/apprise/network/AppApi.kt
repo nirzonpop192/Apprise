@@ -11,7 +11,7 @@ import retrofit2.http.Query
 //@GET("?i=tt3896198&apikey=2088fa00")
 interface AppApi {
     @GET("/")
-    suspend fun getMovie(@Query("i") imd_id:String, @Query("apikey")api_key:String) : Response<MovieResponse>
+    suspend fun getMovie(@Query("i") imd_id:String?, @Query("apikey")api_key:String) : Response<MovieResponse>
 //    @GET("/?i=tt3896198&apikey=2088fa00")
 //    suspend fun getD() : Response<MovieResponse>
     @GET("/")

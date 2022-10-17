@@ -1,5 +1,6 @@
 package com.faisal.dc.apprise
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,8 +23,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
     var bannerList :  MutableList<BannerDataModel> = mutableListOf()
     var movieList :  MutableList<Search> = mutableListOf()
+    var latestMovieList :  MutableList<Search> = mutableListOf()
     lateinit var bannerAdapter : CarouselAdapter
     lateinit var rail_1_Adapter : HomeMovieAdapter
+    lateinit var rail_2_Adapter : HomeMovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +48,32 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        rail_1_Adapter = HomeMovieAdapter(movieList)
+        rail_1_Adapter = HomeMovieAdapter(movieList,
+            object:HomeMovieAdapter.OnItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(this@MainActivity, MovieDetailsActivity::class.java)
+                    intent.putExtra("key", movieList.get(position))
+                    startActivity(intent)
+                }
+            }
+        )
+
+        rail_2_Adapter = HomeMovieAdapter(latestMovieList,
+            object:HomeMovieAdapter.OnItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(this@MainActivity, MovieDetailsActivity::class.java)
+                    intent.putExtra("key", latestMovieList.get(position))
+                    startActivity(intent)
+                }
+            }
+        )
+
         val layoutManager = LinearLayoutManager(applicationContext,LinearLayoutManager.HORIZONTAL,false)
+        val layoutManager1 = LinearLayoutManager(applicationContext,LinearLayoutManager.HORIZONTAL,false)
         binding.rvRail1.layoutManager = layoutManager
         binding.rvRail1.adapter=rail_1_Adapter
+        binding.rvRail2.layoutManager = layoutManager1
+        binding.rvRail2.adapter=rail_2_Adapter
 
 
     }
@@ -61,10 +86,24 @@ class MainActivity : AppCompatActivity() {
 
 
             // Checking the results
-            Log.d("dim: ", result.body().toString())
+           // Log.d("dim: ", result.body().toString())
             movieList.addAll( result.body()!!.Search)
 
             rail_1_Adapter.updateData(movieList)
+
+
+        }
+
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val result = quotesApi.getMovieList("Avenger","1", RetrofitHelper.API_KEY)
+
+
+            // Checking the results
+            // Log.d("dim: ", result.body().toString())
+            latestMovieList.addAll( result.body()!!.Search)
+
+            rail_2_Adapter.updateData(latestMovieList)
 
 
         }
@@ -76,13 +115,13 @@ class MainActivity : AppCompatActivity() {
             // Checking the results
             //     Log.d("dim: ", result.body().toString())
 
-
+            bannerList.clear()
             for (i in 1..5) {
                 result.body()?.Poster?.let {
                     bannerList.add(BannerDataModel(i, it)) }
 
             }
-            bannerAdapter.notifyDataSetChanged()
+            bannerAdapter.updateData(bannerList)
 
 
         }
