@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.faisal.dc.apprise.HomeFragment
+import com.faisal.dc.apprise.ListFragment
 
 class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
@@ -16,7 +17,7 @@ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
                 return HomeFragment()
             }
             1 -> {
-                return HomeFragment()
+                return ListFragment()
             }
 
             else -> {

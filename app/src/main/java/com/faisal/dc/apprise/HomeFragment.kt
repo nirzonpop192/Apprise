@@ -17,6 +17,7 @@ import com.faisal.dc.apprise.model.BannerDataModel
 import com.faisal.dc.apprise.model.Search
 import com.faisal.dc.apprise.network.AppApi
 import com.faisal.dc.apprise.network.RetrofitHelper
+import com.faisal.dc.apprise.network.Utility.isInternetAvailable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -78,48 +79,52 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         val quotesApi = RetrofitHelper.getInstance().create(AppApi::class.java)
         super.onResume()
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = quotesApi.getMovieList("Batman","1", RetrofitHelper.API_KEY)
+        if(context?.isInternetAvailable() == true){
+            GlobalScope.launch(Dispatchers.Main) {
+                val result = quotesApi.getMovieList("Batman", "1", RetrofitHelper.API_KEY)
 
 
-            // Checking the results
-            // Log.d("dim: ", result.body().toString())
-            movieList.addAll( result.body()!!.Search)
+                // Checking the results
+                // Log.d("dim: ", result.body().toString())
+                movieList.addAll(result.body()!!.Search)
 
-            rail_1_Adapter.updateData(movieList)
+                rail_1_Adapter.updateData(movieList)
 
-
-        }
-
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = quotesApi.getMovieList("Avenger","1", RetrofitHelper.API_KEY)
-
-
-            // Checking the results
-            // Log.d("dim: ", result.body().toString())
-            latestMovieList.addAll( result.body()!!.Search)
-
-            rail_2_Adapter.updateData(latestMovieList)
-
-
-        }
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = quotesApi.getMovie("tt3896198", RetrofitHelper.API_KEY)
-
-
-            // Checking the results
-            //     Log.d("dim: ", result.body().toString())
-
-            bannerList.clear()
-            for (i in 1..5) {
-                result.body()?.Poster?.let {
-                    bannerList.add(BannerDataModel(i, it)) }
 
             }
-            bannerAdapter.updateData(bannerList)
 
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val result = quotesApi.getMovieList("Avenger", "1", RetrofitHelper.API_KEY)
+
+
+                // Checking the results
+                // Log.d("dim: ", result.body().toString())
+                latestMovieList.addAll(result.body()!!.Search)
+
+                rail_2_Adapter.updateData(latestMovieList)
+
+
+            }
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val result = quotesApi.getMovie("tt3896198", RetrofitHelper.API_KEY)
+
+
+                // Checking the results
+                //     Log.d("dim: ", result.body().toString())
+
+                bannerList.clear()
+                for (i in 1..5) {
+                    result.body()?.Poster?.let {
+                        bannerList.add(BannerDataModel(i, it))
+                    }
+
+                }
+                bannerAdapter.updateData(bannerList)
+
+
+            }
 
         }
     }
