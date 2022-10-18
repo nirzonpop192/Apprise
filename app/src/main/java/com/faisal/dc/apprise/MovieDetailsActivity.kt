@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.MediaController
 import androidx.databinding.DataBindingUtil
-import com.faisal.dc.apprise.databinding.ActivityMainBinding
 import com.faisal.dc.apprise.databinding.ActivityMovieDetailsBinding
-import com.faisal.dc.apprise.model.BannerDataModel
 import com.faisal.dc.apprise.model.Search
-import com.faisal.dc.apprise.network.AppApi
-import com.faisal.dc.apprise.network.RetrofitHelper
+import com.faisal.dc.apprise.util.AppApi
+import com.faisal.dc.apprise.util.RetrofitHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

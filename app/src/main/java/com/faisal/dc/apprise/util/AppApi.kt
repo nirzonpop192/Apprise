@@ -1,4 +1,4 @@
-package com.faisal.dc.apprise.network
+package com.faisal.dc.apprise.util
 
 import com.faisal.dc.apprise.model.MovieResponse
 import com.faisal.dc.apprise.model.SearchResponse

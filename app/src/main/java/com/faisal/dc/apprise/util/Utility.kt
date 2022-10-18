@@ -1,4 +1,4 @@
-package com.faisal.dc.apprise.network
+package com.faisal.dc.apprise.util
 
 import android.content.Context
 import android.graphics.Color

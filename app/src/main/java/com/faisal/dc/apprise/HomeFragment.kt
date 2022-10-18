@@ -1,13 +1,10 @@
 package com.faisal.dc.apprise
 
-import android.R
-import android.R.attr.data
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faisal.dc.apprise.adapter.CarouselAdapter
@@ -15,9 +12,9 @@ import com.faisal.dc.apprise.adapter.HomeMovieAdapter
 import com.faisal.dc.apprise.databinding.FragmentHomeBinding
 import com.faisal.dc.apprise.model.BannerDataModel
 import com.faisal.dc.apprise.model.Search
-import com.faisal.dc.apprise.network.AppApi
-import com.faisal.dc.apprise.network.RetrofitHelper
-import com.faisal.dc.apprise.network.Utility.isInternetAvailable
+import com.faisal.dc.apprise.util.AppApi
+import com.faisal.dc.apprise.util.RetrofitHelper
+import com.faisal.dc.apprise.util.Utility.isInternetAvailable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

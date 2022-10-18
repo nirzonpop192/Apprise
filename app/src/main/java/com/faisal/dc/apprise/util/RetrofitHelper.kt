@@ -1,4 +1,4 @@
-package com.faisal.dc.apprise.network
+package com.faisal.dc.apprise.util
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
